@@ -26,3 +26,7 @@ Route::get('catalog/show/{id}', 'CatalogController@getShow')->where('id', '[0-9]
 Route::get('catalog/create', 'CatalogController@getCreate');
 
 Route::get('catalog/edit/{id}', 'CatalogController@getEdit')->where('id', '[0-9]+');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
