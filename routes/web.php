@@ -13,19 +13,18 @@
 
 Route::get('/', 'HomeController@getHome');
 
-Route::get('login', function () {
-    return view('auth.login');
+Route::group(['prefix' => 'catalog', 'middleware' => 'auth'], function() {
+    Route::get('/', 'CatalogController@getIndex');
+
+    Route::get('show/{id}', 'CatalogController@getShow')->where('id', '[0-9]+');
+
+    Route::get('create', 'CatalogController@getCreate');
+    Route::post('create', 'CatalogController@postCreate');
+
+    Route::get('edit/{id}', 'CatalogController@getEdit')->where('id', '[0-9]+');
+    Route::put('edit', 'CatalogController@putEdit');
+
 });
-Route::get('logout', function () {
-    return view('auth.logout');
-});
-Route::get('catalog', 'CatalogController@getIndex');
-
-Route::get('catalog/show/{id}', 'CatalogController@getShow')->where('id', '[0-9]+');
-
-Route::get('catalog/create', 'CatalogController@getCreate');
-
-Route::get('catalog/edit/{id}', 'CatalogController@getEdit')->where('id', '[0-9]+');
 
 Auth::routes();
 

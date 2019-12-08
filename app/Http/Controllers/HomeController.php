@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Movie;
+
 class HomeController extends Controller
 {
     /**
@@ -21,17 +21,18 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function getHome()
     {
-        return view('catalog.index');
+        return redirect(action('CatalogController@getIndex'));
     }
 
-    public function getHome()
-    {  $arrayPeliculas =Movie::all();
-        return view('catalog.index',
-            array(
-                'arrayPeliculas' =>$arrayPeliculas
-            )
-        );
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return view('home');
     }
 }
